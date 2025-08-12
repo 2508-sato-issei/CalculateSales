@@ -54,14 +54,14 @@ public class CalculateSales {
 		//売上ファイルの読み込み
 		for(int i = 0; i < rcdFiles.size(); i++) {
 			BufferedReader br = null;
-			List<String> lines = new ArrayList<>();
+			List<String> fileContents = new ArrayList<>();
 			try {
 				FileReader fr = new FileReader(rcdFiles.get(i));
 				br = new BufferedReader(fr);
 
 				String line;
 				while((line = br.readLine()) != null) {
-					 lines.add(line);
+					 fileContents.add(line);
 				}
 			} catch(IOException e) {
 				System.out.println(UNKNOWN_ERROR);
@@ -80,12 +80,12 @@ public class CalculateSales {
 			}
 
 			//売上金額の型変換
-			long fileSale = Long.parseLong(lines.get(1));
+			long fileSale = Long.parseLong(fileContents.get(1));
 
-			Long saleAmount = branchSales.get(lines.get(0)) + fileSale;
+			Long saleAmount = branchSales.get(fileContents.get(0)) + fileSale;
 
 			//加算した売上金額をMapに追加
-			branchSales.put(lines.get(0), saleAmount);
+			branchSales.put(fileContents.get(0), saleAmount);
 		}
 
 		// 支店別集計ファイル書き込み処理
