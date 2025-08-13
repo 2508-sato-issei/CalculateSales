@@ -24,6 +24,10 @@ public class CalculateSales {
 	private static final String UNKNOWN_ERROR = "予期せぬエラーが発生しました";
 	private static final String FILE_NOT_EXIST = "支店定義ファイルが存在しません";
 	private static final String FILE_INVALID_FORMAT = "支店定義ファイルのフォーマットが不正です";
+	private static final String FILE_NAME_NOT_CONSECUTIVE = "売上ファイル名が連番になっていません";
+	private static final String DIGIT_OVERFLOW = "合計金額が10桁を超えました";
+	private static final String BRANCH_CODE_NOT_EXIST =  "の支店コードが不正です";
+	private static final String SALES_FILE_INVALID_FORMAT = "のフォーマットが不正です";
 
 	/**
 	 * メインメソッド
@@ -67,7 +71,7 @@ public class CalculateSales {
 			int latter = Integer.parseInt(rcdFiles.get(i + 1).getName().substring(0, 8));
 
 			if((latter - former) != 1) {
-				System.out.println("売上ファイル名が連番になっていません");
+				System.out.println(FILE_NAME_NOT_CONSECUTIVE);
 				return;
 			}
 		}
@@ -100,15 +104,15 @@ public class CalculateSales {
 				}
 			}
 
-			//売上ファイルの支店コードが支店定義ファイルに存在するか確認
-			if(!branchNames.containsKey(fileContents.get(0))) {
-				System.out.println(rcdFiles.get(i).getName() + "の支店コードが不正です");
+			//売上ファイルのフォーマット確認
+			if(fileContents.size() != 2) {
+				System.out.println(rcdFiles.get(i).getName() + SALES_FILE_INVALID_FORMAT);
 				return;
 			}
 
-			//売上ファイルのフォーマット確認
-			if(fileContents.size() != 2) {
-				System.out.println(rcdFiles.get(i).getName() + "のフォーマットが不正です");
+			//売上ファイルの支店コードが支店定義ファイルに存在するか確認
+			if(!branchNames.containsKey(fileContents.get(0))) {
+				System.out.println(rcdFiles.get(i).getName() + BRANCH_CODE_NOT_EXIST);
 				return;
 			}
 
@@ -125,7 +129,7 @@ public class CalculateSales {
 
 			//売上金額の合計が10桁を超えたか確認
 			if(saleAmount >= 10000000000L) {
-				System.out.println("合計金額が10桁を超えました");
+				System.out.println(DIGIT_OVERFLOW);
 				return;
 			}
 
