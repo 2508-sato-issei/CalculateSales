@@ -139,7 +139,7 @@ public class CalculateSales {
 				System.out.println(rcdFiles.get(i).getName() + BRANCH_CODE_NOT_EXIST);
 				return;
 			}
-			
+
 			//売上ファイルの商品コードが商品定義ファイルに存在するか確認
 			if(!commodityNames.containsKey(fileContents.get(1))) {
 				System.out.println(rcdFiles.get(i).getName() + COMMODITY_CODE_NOT_EXIST);
@@ -160,11 +160,7 @@ public class CalculateSales {
 
 
 			//売上金額の合計が10桁を超えたか確認
-			if(branchSaleAmount >= 10000000000L) {
-				System.out.println(DIGIT_OVERFLOW);
-				return;
-			}
-			if(commoditySaleAmount >= 10000000000L) {
+			if(branchSaleAmount >= 10000000000L || commoditySaleAmount >= 10000000000L) {
 				System.out.println(DIGIT_OVERFLOW);
 				return;
 			}
@@ -178,7 +174,7 @@ public class CalculateSales {
 		if(!writeFile(args[0], FILE_NAME_BRANCH_OUT, branchNames, branchSales)) {
 			return;
 		}
-		
+
 		// 商品別集計ファイル書き込み処理
 		if(!writeFile(args[0], FILE_NAME_COMMODITY_OUT, commodityNames, commoditySales)) {
 			return;
