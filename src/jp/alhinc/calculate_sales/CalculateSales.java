@@ -42,8 +42,8 @@ public class CalculateSales {
 	private static final String COMMODITY_CODE_NOT_EXIST =  "の商品コードが不正です";
 
 	// 日本語ファイル名（ファイル読み込み処理のエラーメッセージ分類で使用）
-	private static final String JAPANESE_FILE_NAME_BRANCH_LST = "支店定義ファイル";
-	private static final String JAPANESE_FILE_NAME_COMMODITY_LST = "商品定義ファイル";
+	private static final String JAPANESE_FILE_NAME_BRANCH_LST = "支店定義";
+	private static final String JAPANESE_FILE_NAME_COMMODITY_LST = "商品定義";
 
 	/**
 	 * メインメソッド
